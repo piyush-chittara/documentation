@@ -1,0 +1,232 @@
+# SDK
+
+To integrate the SDK with your repository, follow the steps below. The following code snippets provide examples of how to use the SDK functions to interact with the smart contract.
+
+**1. Get User Asset Details:**
+
+To retrieve the details of a specific user asset, you can use the following function:
+
+* Specify the user's public address and the index of the user asset.
+* Provide the chainId&#x20;
+
+{% tabs %}
+{% tab title="JS" %}
+```javascript
+const userAddress = "USER_PUBLIC_KEY";
+
+stream.getAssestsByUser(userAddress, chainId)
+  .then((result) => {
+    // Handle the result
+  })
+  .catch((error) => {
+    // Handle the error
+  });
+```
+{% endtab %}
+{% endtabs %}
+
+Executing this code will fetch the details of the user asset associated with the provided user address. The result will contain information such as the asset's token address, token ID, and other relevant details pertaining to the user asset.
+
+
+
+**2. Initialize Rent for a Specific Asset:**
+
+To initiate a rent for a specific asset, you can use the following function:
+
+* Provide the token address of the asset, the token ID, and other required parameters such as the rate per minute, validity duration, fixed/variable rent, owner share, and whitelist.
+* Specify the chainId and signer information.
+
+{% tabs %}
+{% tab title="JS" %}
+```javascript
+const tokenAddress = "TOKEN_ADDRESS";
+const tokenId = "TOKEN_ID";
+const ratePerMinute = 10;
+const validityMinutes = 60;
+const isFixed = false;
+const fixedMinutes = 0;
+const doMint=false; // receipt type: smart registry, true=> mint wrapped token
+const ownerShare = 80; // in percentage
+const whitelist = []; // Array of whitelisted addresses
+
+stream.lendToken(
+  tokenAddress,
+  tokenId,
+  ratePerMinute,
+  validityMinutes,
+  isFixed,
+  fixedMinutes,
+  doMint,
+  ownerShare,
+  whitelist,
+  chainId,
+  signer
+)
+  .then((result) => {
+    // Handle the result
+  })
+  .catch((error) => {
+    // Handle the error
+  });
+```
+{% endtab %}
+{% endtabs %}
+
+
+
+**3. Get Asset Manager Details:**
+
+To retrieve the asset manager details for a specific token, you can use the following function:
+
+* Provide the token address and token ID of the asset.
+* Specify the chainId&#x20;
+
+{% tabs %}
+{% tab title="JS" %}
+<pre class="language-javascript"><code class="lang-javascript">const tokenAddress = "TOKEN_ADDRESS";
+const tokenId = "TOKEN_ID";
+<strong>stream.getAssetManager(tokenAddress, tokenId, chainId)
+</strong>  .then((result) => {
+    // Handle the result (asset manager details)
+  })
+  .catch((error) => {
+    // Handle the error
+  });
+</code></pre>
+{% endtab %}
+{% endtabs %}
+
+Executing this code will fetch the asset manager details for the specified token. Ensure that you provide the correct token address and token ID corresponding to the asset you want to retrieve information for. The result will contain relevant details about the asset manager, which can be further processed or displayed as needed in your application.
+
+
+
+**4. Process a Rent for a Specific Asset:**
+
+To initiate a rental process for a specific asset, you can utilize the following function:
+
+* Provide the token address and token ID of the asset.
+* Specify the duration of the rent in minutes.
+* Specify the chainId and signer information.
+
+{% tabs %}
+{% tab title="JS" %}
+```javascript
+const tokenAddress = "TOKEN_ADDRESS";
+const tokenId = "TOKEN_ID";
+const durationMinutes = 120;
+
+stream.stream.processRent(tokenAddress, tokenId, durationMinutes, chainId, signer)
+  .then((result) => {
+    // Handle the result
+  })
+  .catch((error) => {
+    // Handle the error
+  });
+```
+{% endtab %}
+{% endtabs %}
+
+Executing this code will trigger the rental process for the specified asset. Ensure that you provide the correct token address and token ID corresponding to the asset you want to initiate the rent for. Set the desired duration of the rent in minutes. The result will indicate the success of the rental process, and you can handle it accordingly in your application.
+
+
+
+**5. Expire a Rent for a Specific Asset:**
+
+To expire a rent for a specific asset, you can use the following function:
+
+* Provide the token address and token ID of the asset for which you want to expire the rent.
+* Specify the chainId and signer information.
+
+{% tabs %}
+{% tab title="JS" %}
+```javascript
+const tokenAddress = "TOKEN_ADDRESS";
+const tokenId = "TOKEN_ID";
+
+stream.expireRent(tokenAddress, tokenId, chainId, signer)
+  .then((result) => {
+    // Handle the result
+  })
+  .catch((error) => {
+    // Handle the error
+  });
+```
+{% endtab %}
+{% endtabs %}
+
+By executing this code, you initiate the process to expire the rent for the specified asset. Make sure to provide the correct token address and token ID corresponding to the asset you want to expire the rent for. The result will indicate the successful expiration of the rent, and you can handle it accordingly in your application logic.
+
+
+
+**6. Cancel a Rent for a Specific Asset:**
+
+To cancel a rent for a specific asset, you can use the following function:
+
+* Provide the token address and token ID of the asset for which you want to cancel the rent.
+* Specify the chainId and signer information.
+
+{% tabs %}
+{% tab title="JS" %}
+```javascript
+const tokenAddress = "TOKEN_ADDRESS";
+const tokenId = "TOKEN_ID";
+
+stream.cancelRent(tokenAddress, tokenId, chainId, signer)
+  .then((result) => {
+    // Handle the result
+  })
+  .catch((error) => {
+    // Handle the error
+  });
+```
+{% endtab %}
+{% endtabs %}
+
+By executing this code, you initiate the process to cancel the rent for the specified asset. Make sure to provide the correct token address and token ID corresponding to the asset you want to cancel the rent for. The result will indicate the successful cancellation of the rent, and you can handle it accordingly in your application logic.
+
+7. **Get Assets by collection**
+
+{% tabs %}
+{% tab title="JS" %}
+```javascript
+const tokenAddress = "TOKEN_ADDRESS";
+
+stream.getAssetsByCollection(tokenAddress, chainId)
+  .then((result) => {
+    // Handle the result
+  })
+  .catch((error) => {
+    // Handle the error
+  });
+```
+{% endtab %}
+{% endtabs %}
+
+By executing this code, you get all all assets for provided collection
+
+8. **Get Assets by collection and wallet**
+
+{% tabs %}
+{% tab title="JS" %}
+```javascript
+const tokenAddress = "TOKEN_ADDRESS";
+const wallet = "USER_WALLET_ADDRESS";
+stream.getAssetsByUserAndCollection(wallet, tokenAddress, chainId)
+  .then((result) => {
+    // Handle the result
+  })
+  .catch((error) => {
+    // Handle the error
+  });
+```
+{% endtab %}
+{% endtabs %}
+
+By executing this code, you get all all assets for provided collection and user
+
+
+
+Make sure to replace the placeholders (TOKEN\_ADDRESS, TOKEN\_ID, USER\_PUBLIC\_KEY, etc.) with the actual values specific to your use case.\
+
+
+These examples demonstrate how to use the SDK functions to interact with the smart contract. You can integrate them into your application logic and handle the results and errors accordingly.
